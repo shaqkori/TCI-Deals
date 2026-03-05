@@ -82,16 +82,30 @@ else:
             for item in items:
                 name = item.find('a', title=True) #searches for the attrabutes and tags with the correct data
                 price = item.find('span', class_="thread-price")
+
                 image = item.find('img')
                 image_url = image["src"] if image else "N/A"
 
                 item_name = name['title'] if name else "N/A"
                 item_price = price.text.strip() if price else "N/A"
 
+                links = item.find_all("a", href=True)
+                source = "N/A" # default link set to n/a but then if link contains /deals in url then saves it  id not then skils it 
+                for link in links:
+                    if "/deals/" in link["href"]:
+                        source_url = link["href"]
+                        break
+                
+                
                 print(f"Item Name: {item_name}")
                 print(f"Item Price: {item_price}")
-                print("---")
                 print(image_url)
+                print(source_url)
+                print("---")
+               
+                
+
+
 
         browser.close()
 
