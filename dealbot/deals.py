@@ -67,7 +67,7 @@ else:
                 print(f"Page failed to load: {e}")
                 break
 
-            if page_num > 1 and tab.url != url:
+            if page_num > 1 and tab.url != url: #skips page one and check through all the urls untill theres no more pages 
                 print("No more pages")
                 break
 
@@ -82,6 +82,8 @@ else:
             for item in items:
                 name = item.find('a', title=True) #searches for the attrabutes and tags with the correct data
                 price = item.find('span', class_="thread-price")
+                image = item.find('img')
+                image_url = image["src"] if image else "N/A"
 
                 item_name = name['title'] if name else "N/A"
                 item_price = price.text.strip() if price else "N/A"
@@ -89,6 +91,7 @@ else:
                 print(f"Item Name: {item_name}")
                 print(f"Item Price: {item_price}")
                 print("---")
+                print(image_url)
 
         browser.close()
 
