@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard — DealAlerts</title>
+    <link rel="stylesheet" href="/webpage/styles/styles.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-inner">
+        <a href="/" class="logo">
+          <svg
+            class="logo-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+            <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+          </svg>
+          <span class="logo-text">DealAlerts</span>
+        </a>
+
+        <div class="header-actions">
+          <span class="badge-premium">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M11.562 3.266a1 1 0 0 1 .876 0L16 5l4 2-1 4.5-3 3.5-4 1-4-1-3-3.5L4 7l4-2z"
+              />
+              <path d="M12 12v9" />
+              <path d="M8.5 21h7" />
+            </svg>
+            Premium
+          </span>
+
+          <a href="/settings" class="btn-icon" aria-label="Settings">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"
+              />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+          </a>
+
+          <a href="/" class="btn-icon" aria-label="Log out">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+              <polyline points="16 17 21 12 16 7" />
+              <line x1="21" y1="12" x2="9" y2="12" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <!-- Welcome -->
+      <div class="welcome">
+        <h1>Welcome back, John!</h1>
+        <p>You have 4 new deals waiting for you today</p>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="card stat-card">
+          <div class="card-header">
+            <div class="stat-label">Active Deals</div>
+            <div class="stat-value">4</div>
+          </div>
+          <div class="card-content">
+            <p class="stat-note green">+3 from yesterday</p>
+          </div>
+        </div>
+
+        <div class="card stat-card">
+          <div class="card-header">
+            <div class="stat-label">Tracked Categories</div>
+            <div class="stat-value">5</div>
+          </div>
+          <div class="card-content">
+            <p class="stat-note">All active</p>
+          </div>
+        </div>
+
+        <div class="card stat-card">
+          <div class="card-header">
+            <div class="stat-label">Avg. Savings</div>
+            <div class="stat-value">28%</div>
+          </div>
+          <div class="card-content">
+            <p class="stat-note">This month</p>
+          </div>
+        </div>
+
+        <div class="card stat-card">
+          <div class="card-header">
+            <div class="stat-label">Total Saved</div>
+            <div class="stat-value">$847</div>
+          </div>
+          <div class="card-content">
+            <p class="stat-note green">Since joining</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main grid -->
+      <div class="main-grid">
+        <!-- Deals / Tabs -->
+        <div>
+          <div class="tabs-list" role="tablist">
+            <button
+              class="tab-btn active"
+              role="tab"
+              aria-selected="true"
+              data-tab="active"
+            >
+              Active Deals
+            </button>
+            <button
+              class="tab-btn"
+              role="tab"
+              aria-selected="false"
+              data-tab="history"
+            >
+              History
+            </button>
+            <button
+              class="tab-btn"
+              role="tab"
+              aria-selected="false"
+              data-tab="saved"
+            >
+              Saved
+            </button>
+          </div>
+
+          <!-- Active Deals -->
+          <div id="tab-active" class="tab-panel active" role="tabpanel">
+            <div class="deal-list">
+              <div class="deal-card">
+                <div class="deal-inner">
+                  <img
+                    class="deal-img"
+                    src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&h=300&fit=crop"
+                    alt="Apple MacBook Pro 16 M3 Max"
+                  />
+                  <div class="deal-body">
+                    <div class="deal-top">
+                      <div>
+                        <div class="deal-title">
+                          Apple MacBook Pro 16" M3 Max
+                        </div>
+                        <span class="badge-outline">Electronics</span>
+                      </div>
+                      <span class="badge-discount">-14%</span>
+                    </div>
+                    <div class="deal-price">
+                      <span class="price-current">$2,999</span>
+                      <span class="price-original">$3,499</span>
+                    </div>
+                    <div class="deal-footer">
+                      <span class="deal-meta">Amazon • 2 hours ago</span>
+                      <a href="#" class="btn-sm">
+                        View Deal
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                          />
+                          <polyline points="15 3 21 3 21 9" />
+                          <line x1="10" y1="14" x2="21" y2="3" />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="deal-card">
+                <div class="deal-inner">
+                  <img
+                    class="deal-img"
+                    src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=300&fit=crop"
+                    alt="Nike Air Max 270"
+                  />
+                  <div class="deal-body">
+                    <div class="deal-top">
+                      <div>
+                        <div class="deal-title">
+                          Nike Air Max 270 Running Shoes
+                        </div>
+                        <span class="badge-outline">Shoes &amp; Footwear</span>
+                      </div>
+                      <span class="badge-discount">-40%</span>
+                    </div>
+                    <div class="deal-price">
+                      <span class="price-current">$89.99</span>
+                      <span class="price-original">$150</span>
+                    </div>
+                    <div class="deal-footer">
+                      <span class="deal-meta">Nike.com • 5 hours ago</span>
+                      <a href="#" class="btn-sm">
+                        View Deal
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                          />
+                          <polyline points="15 3 21 3 21 9" />
+                          <line x1="10" y1="14" x2="21" y2="3" />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="deal-card">
+                <div class="deal-inner">
+                  <img
+                    class="deal-img"
+                    src="https://images.unsplash.com/photo-1558317374-067fb5f30001?w=400&h=300&fit=crop"
+                    alt="Dyson V15 Detect"
+                  />
+                  <div class="deal-body">
+                    <div class="deal-top">
+                      <div>
+                        <div class="deal-title">
+                          Dyson V15 Detect Vacuum Cleaner
+                        </div>
+                        <span class="badge-outline">Home Appliances</span>
+                      </div>
+                      <span class="badge-discount">-27%</span>
+                    </div>
+                    <div class="deal-price">
+                      <span class="price-current">$549</span>
+                      <span class="price-original">$749</span>
+                    </div>
+                    <div class="deal-footer">
+                      <span class="deal-meta">Best Buy • 1 day ago</span>
+                      <a href="#" class="btn-sm">
+                        View Deal
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                          />
+                          <polyline points="15 3 21 3 21 9" />
+                          <line x1="10" y1="14" x2="21" y2="3" />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="deal-card">
+                <div class="deal-inner">
+                  <img
+                    class="deal-img"
+                    src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&h=300&fit=crop"
+                    alt="Charlotte Tilbury Makeup Set"
+                  />
+                  <div class="deal-body">
+                    <div class="deal-top">
+                      <div>
+                        <div class="deal-title">
+                          Charlotte Tilbury Makeup Set
+                        </div>
+                        <span class="badge-outline">Beauty &amp; Makeup</span>
+                      </div>
+                      <span class="badge-discount">-31%</span>
+                    </div>
+                    <div class="deal-price">
+                      <span class="price-current">$89</span>
+                      <span class="price-original">$129</span>
+                    </div>
+                    <div class="deal-footer">
+                      <span class="deal-meta">Sephora • 1 day ago</span>
+                      <a href="#" class="btn-sm">
+                        View Deal
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                          />
+                          <polyline points="15 3 21 3 21 9" />
+                          <line x1="10" y1="14" x2="21" y2="3" />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- History -->
+          <div id="tab-history" class="tab-panel" role="tabpanel">
+            <div class="tab-empty">
+              <p>Your deal notification history will appear here</p>
+            </div>
+          </div>
+
+          <!-- Saved -->
+          <div id="tab-saved" class="tab-panel" role="tabpanel">
+            <div class="tab-empty">
+              <p>Deals you've saved for later will appear here</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+          <!-- Tracked Categories -->
+          <div class="card">
+            <div class="card-header">
+              <div class="card-header-row">
+                <h2 class="card-title">Tracked Categories</h2>
+                <a href="/settings" class="btn-ghost-sm">Manage</a>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="category-list">
+                <div class="category-item">
+                  <div>
+                    <div class="category-name">Electronics</div>
+                    <div class="category-count">12 products</div>
+                  </div>
+                  <div class="category-dot"></div>
+                </div>
+                <div class="category-item">
+                  <div>
+                    <div class="category-name">Fashion &amp; Apparel</div>
+                    <div class="category-count">8 products</div>
+                  </div>
+                  <div class="category-dot"></div>
+                </div>
+                <div class="category-item">
+                  <div>
+                    <div class="category-name">Home Appliances</div>
+                    <div class="category-count">5 products</div>
+                  </div>
+                  <div class="category-dot"></div>
+                </div>
+                <div class="category-item">
+                  <div>
+                    <div class="category-name">Beauty &amp; Makeup</div>
+                    <div class="category-count">15 products</div>
+                  </div>
+                  <div class="category-dot"></div>
+                </div>
+                <div class="category-item">
+                  <div>
+                    <div class="category-name">Shoes &amp; Footwear</div>
+                    <div class="category-count">7 products</div>
+                  </div>
+                  <div class="category-dot"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- This Week -->
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">This Week</h2>
+            </div>
+            <div class="card-content">
+              <div class="week-stat">
+                <span>New Deals</span>
+                <span class="val">24</span>
+              </div>
+              <div class="week-stat">
+                <span>Notifications Sent</span>
+                <span class="val">18</span>
+              </div>
+              <div class="week-stat">
+                <span>Avg. Discount</span>
+                <span class="val green">32%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Price Alert -->
+          <div class="card alert-card">
+            <div class="card-header">
+              <div class="alert-icon-row">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+                  <polyline points="16 7 22 7 22 13" />
+                </svg>
+                <h2 class="card-title">Price Alert!</h2>
+              </div>
+              <p class="card-description">
+                3 products in your tracked categories just dropped below your
+                target price
+              </p>
+            </div>
+            <div class="card-content">
+              <button class="btn-secondary">View All Alerts</button>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <script>
+      // Tab switching
+      const tabBtns = document.querySelectorAll(".tab-btn");
+      const tabPanels = document.querySelectorAll(".tab-panel");
+
+      tabBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const target = btn.dataset.tab;
+
+          tabBtns.forEach((b) => {
+            b.classList.remove("active");
+            b.setAttribute("aria-selected", "false");
+          });
+          tabPanels.forEach((p) => p.classList.remove("active"));
+
+          btn.classList.add("active");
+          btn.setAttribute("aria-selected", "true");
+          document.getElementById("tab-" + target).classList.add("active");
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,687 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Settings — DealAlerts</title>
+    <link rel="stylesheet" href="/webpage/styles/styles.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-inner">
+        <a href="/" class="logo">
+          <svg
+            class="logo-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+            <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+          </svg>
+          <span class="logo-text">DealAlerts</span>
+        </a>
+        <a href="/dashboard" class="btn-ghost">Back to Dashboard</a>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="page-heading">
+        <h1>Settings</h1>
+        <p>Manage your account and notification preferences</p>
+      </div>
+
+      <!-- Tab bar -->
+      <div class="tabs-list" role="tablist">
+        <button
+          class="tab-btn active"
+          role="tab"
+          aria-selected="true"
+          data-tab="profile"
+        >
+          <!-- User icon -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="8" r="4" />
+            <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+          </svg>
+          <span>Profile</span>
+        </button>
+        <button
+          class="tab-btn"
+          role="tab"
+          aria-selected="false"
+          data-tab="categories"
+        >
+          <!-- Settings icon -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path
+              d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"
+            />
+            <circle cx="12" cy="12" r="3" />
+          </svg>
+          <span>Categories</span>
+        </button>
+        <button
+          class="tab-btn"
+          role="tab"
+          aria-selected="false"
+          data-tab="notifications"
+        >
+          <!-- Bell icon -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+            <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+          </svg>
+          <span>Notifications</span>
+        </button>
+        <button
+          class="tab-btn"
+          role="tab"
+          aria-selected="false"
+          data-tab="billing"
+        >
+          <!-- CreditCard icon -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <rect width="22" height="16" x="1" y="4" rx="2" />
+            <line x1="1" y1="10" x2="23" y2="10" />
+          </svg>
+          <span>Billing</span>
+        </button>
+      </div>
+
+      <!-- ── Profile Tab ── -->
+      <div id="tab-profile" class="tab-panel active" role="tabpanel">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Personal Information</h2>
+            <p class="card-description">Update your account details</p>
+          </div>
+          <div class="card-content">
+            <div class="name-grid">
+              <div class="field">
+                <label for="firstName">First Name</label>
+                <input id="firstName" type="text" value="John" />
+              </div>
+              <div class="field">
+                <label for="lastName">Last Name</label>
+                <input id="lastName" type="text" value="Doe" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" type="email" value="john.doe@example.com" />
+            </div>
+            <div class="field">
+              <label for="phone">Phone Number</label>
+              <input id="phone" type="tel" value="+1 (555) 123-4567" />
+            </div>
+            <button class="btn-primary">Save Changes</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Change Password</h2>
+            <p class="card-description">Update your password</p>
+          </div>
+          <div class="card-content">
+            <div class="field">
+              <label for="currentPassword">Current Password</label>
+              <input
+                id="currentPassword"
+                type="password"
+                placeholder="••••••••"
+                autocomplete="current-password"
+              />
+            </div>
+            <div class="field">
+              <label for="newPassword">New Password</label>
+              <input
+                id="newPassword"
+                type="password"
+                placeholder="••••••••"
+                autocomplete="new-password"
+              />
+            </div>
+            <div class="field">
+              <label for="confirmPassword">Confirm New Password</label>
+              <input
+                id="confirmPassword"
+                type="password"
+                placeholder="••••••••"
+                autocomplete="new-password"
+              />
+            </div>
+            <button class="btn-primary">Update Password</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Categories Tab ── -->
+      <div id="tab-categories" class="tab-panel" role="tabpanel">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Manage Tracked Categories</h2>
+            <div class="card-description">
+              Select the product categories you want to track for deals
+              <div style="margin-top: 0.5rem">
+                <span class="badge-outline">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M11.562 3.266a1 1 0 0 1 .876 0L16 5l4 2-1 4.5-3 3.5-4 1-4-1-3-3.5L4 7l4-2z"
+                    />
+                    <path d="M12 12v9" />
+                    <path d="M8.5 21h7" />
+                  </svg>
+                  Premium: Unlimited categories
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="card-content">
+            <!-- Enabled categories -->
+            <div class="category-row">
+              <div class="category-row-left">
+                <div class="category-dot"></div>
+                <div>
+                  <div class="category-name">Electronics</div>
+                  <div class="category-status">Active</div>
+                </div>
+              </div>
+              <label class="switch" aria-label="Toggle Electronics">
+                <input type="checkbox" checked onchange="syncDot(this)" />
+                <span class="switch-track"></span>
+              </label>
+            </div>
+
+            <div class="category-row">
+              <div class="category-row-left">
+                <div class="category-dot"></div>
+                <div>
+                  <div class="category-name">Fashion &amp; Apparel</div>
+                  <div class="category-status">Active</div>
+                </div>
+              </div>
+              <label class="switch" aria-label="Toggle Fashion">
+                <input type="checkbox" checked onchange="syncDot(this)" />
+                <span class="switch-track"></span>
+              </label>
+            </div>
+
+            <div class="category-row">
+              <div class="category-row-left">
+                <div class="category-dot"></div>
+                <div>
+                  <div class="category-name">Home Appliances</div>
+                  <div class="category-status">Active</div>
+                </div>
+              </div>
+              <label class="switch" aria-label="Toggle Home Appliances">
+                <input type="checkbox" checked onchange="syncDot(this)" />
+                <span class="switch-track"></span>
+              </label>
+            </div>
+
+            <div class="category-row">
+              <div class="category-row-left">
+                <div class="category-dot"></div>
+                <div>
+                  <div class="category-name">Beauty &amp; Makeup</div>
+                  <div class="category-status">Active</div>
+                </div>
+              </div>
+              <label class="switch" aria-label="Toggle Beauty">
+                <input type="checkbox" checked onchange="syncDot(this)" />
+                <span class="switch-track"></span>
+              </label>
+            </div>
+
+            <div class="category-row">
+              <div class="category-row-left">
+                <div class="category-dot"></div>
+                <div>
+                  <div class="category-name">Shoes &amp; Footwear</div>
+                  <div class="category-status">Active</div>
+                </div>
+              </div>
+              <label class="switch" aria-label="Toggle Shoes">
+                <input type="checkbox" checked onchange="syncDot(this)" />
+                <span class="switch-track"></span>
+              </label>
+            </div>
+
+            <!-- Disabled categories -->
+            <div class="category-row">
+              <div class="category-row-left">
+                <div class="category-dot invisible"></div>
+                <div>
+                  <div class="category-name">Sports &amp; Fitness</div>
+                  <div class="category-status">Inactive</div>
+                </div>
+              </div>
+              <label class="switch" aria-label="Toggle Sports">
+                <input type="checkbox" onchange="syncDot(this)" />
+                <span class="switch-track"></span>
+              </label>
+            </div>
+
+            <div class="category-row">
+              <div class="category-row-left">
+                <div class="category-dot invisible"></div>
+                <div>
+                  <div class="category-name">Books &amp; Media</div>
+                  <div class="category-status">Inactive</div>
+                </div>
+              </div>
+              <label class="switch" aria-label="Toggle Books">
+                <input type="checkbox" onchange="syncDot(this)" />
+                <span class="switch-track"></span>
+              </label>
+            </div>
+
+            <div class="category-row">
+              <div class="category-row-left">
+                <div class="category-dot invisible"></div>
+                <div>
+                  <div class="category-name">Toys &amp; Games</div>
+                  <div class="category-status">Inactive</div>
+                </div>
+              </div>
+              <label class="switch" aria-label="Toggle Toys">
+                <input type="checkbox" onchange="syncDot(this)" />
+                <span class="switch-track"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Alert Thresholds</h2>
+            <p class="card-description">
+              Set minimum discount percentage to trigger alerts
+            </p>
+          </div>
+          <div class="card-content">
+            <div class="field">
+              <label for="threshold">Minimum Discount (%)</label>
+              <div class="select-wrap">
+                <select id="threshold">
+                  <option value="10">10% or more</option>
+                  <option value="20" selected>20% or more</option>
+                  <option value="30">30% or more</option>
+                  <option value="40">40% or more</option>
+                  <option value="50">50% or more</option>
+                </select>
+              </div>
+            </div>
+            <button class="btn-primary">Save Threshold</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Notifications Tab ── -->
+      <div id="tab-notifications" class="tab-panel" role="tabpanel">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Notification Channels</h2>
+            <p class="card-description">
+              Choose how you want to receive deal alerts
+            </p>
+          </div>
+          <div class="card-content">
+            <div class="setting-row">
+              <div>
+                <div class="setting-row-label">Email Notifications</div>
+                <div class="setting-row-desc">Receive alerts via email</div>
+              </div>
+              <label class="switch" aria-label="Toggle email notifications">
+                <input type="checkbox" checked />
+                <span class="switch-track"></span>
+              </label>
+            </div>
+
+            <div class="setting-row">
+              <div>
+                <div class="setting-row-label">
+                  SMS Notifications
+                  <span class="badge-outline">Premium</span>
+                </div>
+                <div class="setting-row-desc">
+                  Get instant text message alerts
+                </div>
+              </div>
+              <label class="switch" aria-label="Toggle SMS notifications">
+                <input type="checkbox" checked />
+                <span class="switch-track"></span>
+              </label>
+            </div>
+
+            <div class="setting-row">
+              <div>
+                <div class="setting-row-label">
+                  WhatsApp Notifications
+                  <span class="badge-outline">Premium</span>
+                </div>
+                <div class="setting-row-desc">Receive alerts on WhatsApp</div>
+              </div>
+              <label class="switch" aria-label="Toggle WhatsApp notifications">
+                <input type="checkbox" />
+                <span class="switch-track"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Notification Frequency</h2>
+            <p class="card-description">
+              Control when and how often you receive alerts
+            </p>
+          </div>
+          <div class="card-content">
+            <div class="setting-row">
+              <div>
+                <div class="setting-row-label">Instant Alerts</div>
+                <div class="setting-row-desc">
+                  Get notified immediately when deals are found
+                </div>
+              </div>
+              <label class="switch" aria-label="Toggle instant alerts">
+                <input type="checkbox" checked />
+                <span class="switch-track"></span>
+              </label>
+            </div>
+
+            <div class="setting-row">
+              <div>
+                <div class="setting-row-label">Daily Digest</div>
+                <div class="setting-row-desc">
+                  Receive a summary of all deals once per day
+                </div>
+              </div>
+              <label class="switch" aria-label="Toggle daily digest">
+                <input type="checkbox" checked />
+                <span class="switch-track"></span>
+              </label>
+            </div>
+
+            <div class="field">
+              <label for="digestTime">Daily Digest Time</label>
+              <div class="select-wrap">
+                <select id="digestTime">
+                  <option value="06:00">6:00 AM</option>
+                  <option value="09:00" selected>9:00 AM</option>
+                  <option value="12:00">12:00 PM</option>
+                  <option value="18:00">6:00 PM</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Billing Tab ── -->
+      <div id="tab-billing" class="tab-panel" role="tabpanel">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Current Plan</h2>
+            <p class="card-description">Manage your subscription</p>
+          </div>
+          <div class="card-content">
+            <div class="plan-row">
+              <div>
+                <div class="plan-name-row">
+                  <span class="plan-title">Premium Plan</span>
+                  <span class="badge-blue">Active</span>
+                </div>
+                <div class="plan-price">$19.99 / month</div>
+                <div class="plan-next">Next billing date: March 25, 2026</div>
+              </div>
+              <a href="/pricing" class="btn-outline">Change Plan</a>
+            </div>
+
+            <div class="plan-features">
+              <h4>Your Plan Includes:</h4>
+              <ul>
+                <li>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  Unlimited product categories
+                </li>
+                <li>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  Email + SMS + WhatsApp notifications
+                </li>
+                <li>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  Instant deal alerts
+                </li>
+                <li>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  Priority support
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Payment Method</h2>
+            <p class="card-description">Manage your payment information</p>
+          </div>
+          <div class="card-content">
+            <div class="payment-row">
+              <div class="payment-left">
+                <div class="card-icon-box">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <rect width="22" height="16" x="1" y="4" rx="2" />
+                    <line x1="1" y1="10" x2="23" y2="10" />
+                  </svg>
+                </div>
+                <div>
+                  <div class="card-number">•••• •••• •••• 4242</div>
+                  <div class="card-expiry">Expires 12/2027</div>
+                </div>
+              </div>
+              <button class="btn-outline">Update</button>
+            </div>
+            <button class="btn-ghost-full">+ Add New Payment Method</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2 class="card-title">Billing History</h2>
+            <p class="card-description">View your past invoices</p>
+          </div>
+          <div class="card-content">
+            <div class="invoice-row">
+              <div>
+                <div class="invoice-date">Feb 25, 2026</div>
+                <div class="invoice-amount">$19.99</div>
+              </div>
+              <div class="invoice-right">
+                <span class="badge-green">Paid</span>
+                <button class="btn-ghost-sm">Download</button>
+              </div>
+            </div>
+
+            <div class="invoice-row">
+              <div>
+                <div class="invoice-date">Jan 25, 2026</div>
+                <div class="invoice-amount">$19.99</div>
+              </div>
+              <div class="invoice-right">
+                <span class="badge-green">Paid</span>
+                <button class="btn-ghost-sm">Download</button>
+              </div>
+            </div>
+
+            <div class="invoice-row">
+              <div>
+                <div class="invoice-date">Dec 25, 2025</div>
+                <div class="invoice-amount">$19.99</div>
+              </div>
+              <div class="invoice-right">
+                <span class="badge-green">Paid</span>
+                <button class="btn-ghost-sm">Download</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-red-border">
+          <div class="card-header">
+            <h2 class="card-title card-title-red">Cancel Subscription</h2>
+            <p class="card-description">
+              Cancel your subscription at any time. You'll retain access until
+              the end of your billing period.
+            </p>
+          </div>
+          <div class="card-content">
+            <button class="btn-destructive">Cancel Subscription</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      // Tab switching
+      document.querySelectorAll(".tab-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const target = btn.dataset.tab;
+          document.querySelectorAll(".tab-btn").forEach((b) => {
+            b.classList.remove("active");
+            b.setAttribute("aria-selected", "false");
+          });
+          document
+            .querySelectorAll(".tab-panel")
+            .forEach((p) => p.classList.remove("active"));
+          btn.classList.add("active");
+          btn.setAttribute("aria-selected", "true");
+          document.getElementById("tab-" + target).classList.add("active");
+        });
+      });
+
+      // Sync category dot + status text when switch toggled
+      function syncDot(checkbox) {
+        const row = checkbox.closest(".category-row");
+        const dot = row.querySelector(".category-dot");
+        const status = row.querySelector(".category-status");
+        if (checkbox.checked) {
+          dot.classList.remove("invisible");
+          status.textContent = "Active";
+        } else {
+          dot.classList.add("invisible");
+          status.textContent = "Inactive";
+        }
+      }
+    </script>
+  </body>
+</html>

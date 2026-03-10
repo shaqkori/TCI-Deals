@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login — DealAlerts</title>
+    <link rel="stylesheet" href="/webpage/styles/styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <a href="/" class="logo">
+        <!-- Bell icon (lucide) -->
+        <svg
+          class="logo-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+          <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+        </svg>
+        <span class="logo-text">DealAlerts</span>
+      </a>
+
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">Welcome Back</h2>
+          <p class="card-description">Login to your account to continue</p>
+        </div>
+
+        <div class="card-content">
+          <form class="form" onsubmit="handleSubmit(event)" novalidate>
+            <div class="field">
+              <label for="email">Email</label>
+              <input
+                id="email"
+                type="email"
+                placeholder="you@example.com"
+                required
+                autocomplete="email"
+              />
+            </div>
+
+            <div class="field">
+              <div class="field-row">
+                <label for="password">Password</label>
+                <a href="#forgot" class="link-small">Forgot password?</a>
+              </div>
+              <input
+                id="password"
+                type="password"
+                placeholder="••••••••"
+                required
+                autocomplete="current-password"
+              />
+            </div>
+
+            <button type="submit" class="btn-primary">Login</button>
+
+            <p class="signup-prompt">
+              Don't have an account?
+              <a href="/register">Sign up</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function handleSubmit(e) {
+        e.preventDefault();
+        window.location.href = "/dashboard";
+      }
+    </script>
+  </body>
+</html>
