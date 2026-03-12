@@ -166,6 +166,18 @@
             >
               Saved
             </button>
+
+            <select class="category-dropdown" id="category-filter">
+              <option value="all">All Categories</option>
+              <option value="electronics">Electronics</option>
+              <option value="fashion">Fashion & Apparel</option>
+              <option value="home">Home Appliances</option>
+              <option value="beauty">Beauty & Makeup</option>
+              <option value="shoes">Shoes & Footwear</option>
+              <option value="gaming">Gaming</option>
+              <option value="travel">Travel</option>
+              <option value="sports">Sports & Outdoors</option>
+            </select>
           </div>
 
           <!-- Active Deals -->
@@ -480,26 +492,6 @@
       </div>
     </main>
 
-    <script>
-      // Tab switching
-      const tabBtns = document.querySelectorAll(".tab-btn");
-      const tabPanels = document.querySelectorAll(".tab-panel");
-
-      tabBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const target = btn.dataset.tab;
-
-          tabBtns.forEach((b) => {
-            b.classList.remove("active");
-            b.setAttribute("aria-selected", "false");
-          });
-          tabPanels.forEach((p) => p.classList.remove("active"));
-
-          btn.classList.add("active");
-          btn.setAttribute("aria-selected", "true");
-          document.getElementById("tab-" + target).classList.add("active");
-        });
-      });
-    </script>
+    <script src="/webpage/scripts/landing.js"></script>
   </body>
 </html>
