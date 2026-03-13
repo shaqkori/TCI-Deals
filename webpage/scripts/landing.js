@@ -5,6 +5,7 @@ const categoryList = document.getElementById("category-filter");
 
 let allDeals = [];
 let selectedCategories = [];
+let history = [];
 
 function Deal(name, category, originalPrice, currentPrice, img_url, src_url) {
   this.name = name;
@@ -95,7 +96,7 @@ const deals = [
   ),
 ];
 
-function createDealCard(deal) {
+function createDealCard(deal, isHistory = false) {
   const card = document.createElement("div");
   card.className = "deal-card";
 
@@ -125,6 +126,14 @@ function createDealCard(deal) {
   dealLink.textContent = "View Deal";
   dealLink.className = "btn-sm";
 
+  card.addEventListener("click", () => {
+    if (!isHistory) {
+      addToHistory(deal);
+
+      console.log(history);
+    }
+  });
+
   card.appendChild(image);
   card.appendChild(category);
   card.appendChild(dealName);
@@ -133,6 +142,28 @@ function createDealCard(deal) {
   card.appendChild(dealLink);
 
   return card;
+}
+
+function renderHistory() {
+  const historyList = document.querySelector("#tab-history");
+  historyList.innerHTML = "";
+
+  if (history.length === 0) {
+    return;
+  }
+
+  history.forEach((deal) => {
+    const card = createDealCard(deal, true);
+    historyList.appendChild(card);
+  });
+}
+
+function addToHistory(deal) {
+  const exists = history.some((d) => d.src_url === deal.src_url);
+  if (!exists) {
+    history.push(deal);
+    renderHistory();
+  }
 }
 
 function renderCard() {
