@@ -5,7 +5,9 @@ const categoryList = document.getElementById("category-filter");
 
 let allDeals = [];
 let selectedCategories = [];
-let history = [];
+let userCategories = [];
+
+// ── CONSTRUCTORS ────────────────────────────────────────────
 
 function Deal(name, category, originalPrice, currentPrice, img_url, src_url) {
   this.name = name;
@@ -19,6 +21,44 @@ function Deal(name, category, originalPrice, currentPrice, img_url, src_url) {
   this.img_url = img_url;
   this.src_url = src_url;
 }
+
+class User {
+  constructor(name, email) {
+    this.name = name;
+    this.email = email;
+    this.trackedCategories = [];
+    this.dealHistory = [];
+  }
+
+  trackCategory(categoryValue) {
+    if (!this.trackedCategories.includes(categoryValue)) {
+      this.trackedCategories.push(categoryValue);
+    }
+  }
+
+  untrackCategory(categoryValue) {
+    this.trackedCategories = this.trackedCategories.filter(
+      (c) => c !== categoryValue,
+    );
+  }
+
+  addToHistory(deal) {
+    const exists = this.dealHistory.some((d) => d.src_url === deal.src_url);
+    if (!exists) {
+      this.dealHistory.push(deal);
+    }
+  }
+}
+
+// Mock logged in user — swap this out for a DB fetch later
+const currentUser = new User("carl", "john@example.com");
+currentUser.trackedCategories = [
+  "electronics-photo",
+  "clothing",
+  "home-garden",
+];
+
+// ── MOCK DATA ───────────────────────────────────────────────
 
 const categories = [
   { label: "Automotive", value: "automotive" },
@@ -53,6 +93,7 @@ const categories = [
   { label: "Toys & Games", value: "toys-games" },
   { label: "Video", value: "video" },
 ];
+
 const deals = [
   new Deal(
     "Sony WH-1000XM5 Headphones",
@@ -96,6 +137,8 @@ const deals = [
   ),
 ];
 
+// ── CARDS ───────────────────────────────────────────────────
+
 function createDealCard(deal, isHistory = false) {
   const card = document.createElement("div");
   card.className = "deal-card";
@@ -118,7 +161,7 @@ function createDealCard(deal, isHistory = false) {
   dealCurrentPrice.textContent = deal.currentPrice;
 
   const dealOriginalPrice = document.createElement("div");
-  dealOriginalPrice.className = "price-original line-through text-gray-400";
+  dealOriginalPrice.className = "price-original";
   dealOriginalPrice.textContent = deal.originalPrice;
 
   const dealLink = document.createElement("a");
@@ -126,11 +169,10 @@ function createDealCard(deal, isHistory = false) {
   dealLink.textContent = "View Deal";
   dealLink.className = "btn-sm";
 
-  card.addEventListener("click", () => {
+  dealLink.addEventListener("click", () => {
     if (!isHistory) {
-      addToHistory(deal);
-
-      console.log(history);
+      currentUser.addToHistory(deal);
+      renderHistory();
     }
   });
 
@@ -144,27 +186,7 @@ function createDealCard(deal, isHistory = false) {
   return card;
 }
 
-function renderHistory() {
-  const historyList = document.querySelector("#tab-history");
-  historyList.innerHTML = "";
-
-  if (history.length === 0) {
-    return;
-  }
-
-  history.forEach((deal) => {
-    const card = createDealCard(deal, true);
-    historyList.appendChild(card);
-  });
-}
-
-function addToHistory(deal) {
-  const exists = history.some((d) => d.src_url === deal.src_url);
-  if (!exists) {
-    history.push(deal);
-    renderHistory();
-  }
-}
+// ── RENDER ──────────────────────────────────────────────────
 
 function renderCard() {
   dealList.innerHTML = "";
@@ -179,19 +201,57 @@ function renderCard() {
   });
 }
 
+function renderHistory() {
+  const historyList = document.querySelector("#tab-history");
+  historyList.innerHTML = "";
+
+  if (currentUser.dealHistory.length === 0) {
+    historyList.innerHTML = "<p>No deals viewed yet.</p>";
+    return;
+  }
+
+  currentUser.dealHistory.forEach((deal) => {
+    const card = createDealCard(deal, true);
+    historyList.appendChild(card);
+  });
+}
+
 function getCategories() {
-  categoryList.innerHTML = "";
+  categoryList.innerHTML = '<option value="">All Categories</option>';
 
   categories.forEach((category) => {
     const option = document.createElement("option");
     option.value = category.value;
     option.textContent = category.label;
     categoryList.appendChild(option);
-    //selectedCategories.push(option.value);
   });
-
-  console.log(selectedCategories);
 }
+
+function renderName(user) {
+  const opening = document.querySelector(".welcome");
+  opening.innerHTML = `
+    <h1>Welcome back, ${user.name}</h1>
+    <p>You have 4 new deals waiting for you today</p>
+  `;
+  console.log(user.name);
+}
+
+function renderTrackedCategories(user) {
+  const categoriesTrack = document.querySelector(".category-list");
+  categoriesTrack.innerHTML = "";
+
+  user.trackedCategories.forEach((categoryValue) => {
+    const match = categories.find((c) => c.value === categoryValue);
+
+    const categoryCard = document.createElement("div");
+    categoryCard.className = "category-item";
+    categoryCard.textContent = match ? match.label : categoryValue;
+
+    categoriesTrack.appendChild(categoryCard);
+  });
+}
+
+// ── EVENTS ──────────────────────────────────────────────────
 
 categoryList.addEventListener("change", (e) => {
   const value = e.target.value;
@@ -215,6 +275,10 @@ tabBtns.forEach((btn) => {
   });
 });
 
+// ── INIT ────────────────────────────────────────────────────
+
 allDeals = [...deals];
-renderCard();
 getCategories();
+renderCard();
+renderName(currentUser);
+renderTrackedCategories(currentUser);
