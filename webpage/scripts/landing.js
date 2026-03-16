@@ -224,6 +224,7 @@ function getCategories() {
     option.value = category.value;
     option.textContent = category.label;
     categoryList.appendChild(option);
+    console.log(category.value);
   });
 }
 
