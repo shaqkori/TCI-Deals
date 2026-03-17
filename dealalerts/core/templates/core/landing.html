@@ -1,0 +1,291 @@
+{% extends 'core/base.html' %} {% load static %} {% block title %}Dashboard —
+DealAlerts{% endblock %} {% block extra_head %}
+<link rel="stylesheet" href="{% static 'core/css/styles.css' %}" />
+{% endblock %} {% block content %}
+<main class="container">
+  <!-- Welcome -->
+  <div class="welcome">
+    <h1>Welcome back, {{ user.name }}!</h1>
+    <p>You have {{ active_deal_count }} new deals waiting for you today</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-grid">
+    <div class="card stat-card">
+      <div class="card-header">
+        <div class="stat-label">Active Deals</div>
+        <div class="stat-value">{{ active_deal_count }}</div>
+      </div>
+      <div class="card-content">
+        <p class="stat-note green">+3 from yesterday</p>
+      </div>
+    </div>
+
+    <div class="card stat-card">
+      <div class="card-header">
+        <div class="stat-label">Tracked Categories</div>
+        <div class="stat-value">{{ user.tracked_categories.count }}</div>
+      </div>
+      <div class="card-content">
+        <p class="stat-note">All active</p>
+      </div>
+    </div>
+
+    <div class="card stat-card">
+      <div class="card-header">
+        <div class="stat-label">Avg. Savings</div>
+        <div class="stat-value">28%</div>
+      </div>
+      <div class="card-content">
+        <p class="stat-note">This month</p>
+      </div>
+    </div>
+
+    <div class="card stat-card">
+      <div class="card-header">
+        <div class="stat-label">Total Saved</div>
+        <div class="stat-value">£{{ total_saved }}</div>
+      </div>
+      <div class="card-content">
+        <p class="stat-note green">Since joining</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main grid -->
+  <div class="main-grid">
+    <!-- Deals / Tabs -->
+    <div>
+      <div class="tabs-list" role="tablist">
+        <button
+          class="tab-btn active"
+          role="tab"
+          aria-selected="true"
+          data-tab="active"
+        >
+          Active Deals
+        </button>
+        <button
+          class="tab-btn"
+          role="tab"
+          aria-selected="false"
+          data-tab="history"
+        >
+          History
+        </button>
+
+        <select class="category-dropdown" id="category-filter">
+          <option value="">All Categories</option>
+          {% for category in categories %}
+          <option value="{{ category.value }}">{{ category.label }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- Active Deals -->
+      <div id="tab-active" class="tab-panel active" role="tabpanel">
+        <div class="deal-list">
+          {% for deal in deals %}
+          <div class="deal-card">
+            <div class="deal-inner">
+              <img
+                class="deal-img"
+                src="{{ deal.img_url }}"
+                alt="{{ deal.name }}"
+              />
+              <div class="deal-body">
+                <div class="deal-top">
+                  <div>
+                    <div class="deal-title">{{ deal.name }}</div>
+                    <span class="badge-outline">{{ deal.category }}</span>
+                  </div>
+                  <span class="badge-discount">{{ deal.discount }}</span>
+                </div>
+                <div class="deal-price">
+                  <span class="price-current">{{ deal.current_price }}</span>
+                </div>
+                <div class="deal-footer">
+                  <span class="deal-meta"
+                    >{{ deal.created_at|timesince }} ago</span
+                  >
+                  <a
+                    href="{{ deal.src_url }}"
+                    class="btn-sm"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    View Deal
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                      />
+                      <polyline points="15 3 21 3 21 9" />
+                      <line x1="10" y1="14" x2="21" y2="3" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% empty %}
+          <div class="tab-empty">
+            <p>No deals found for your tracked categories.</p>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- History -->
+      <div id="tab-history" class="tab-panel" role="tabpanel">
+        <div class="deal-list">
+          {% for deal in deal_history %}
+          <div class="deal-card">
+            <div class="deal-inner">
+              <img
+                class="deal-img"
+                src="{{ deal.img_url }}"
+                alt="{{ deal.name }}"
+              />
+              <div class="deal-body">
+                <div class="deal-top">
+                  <div>
+                    <div class="deal-title">{{ deal.name }}</div>
+                    <span class="badge-outline">{{ deal.category }}</span>
+                  </div>
+                  <span class="badge-discount">{{ deal.discount }}</span>
+                </div>
+                <div class="deal-price">
+                  <span class="price-current">{{ deal.current_price }}</span>
+                </div>
+                <div class="deal-footer">
+                  <span class="deal-meta"
+                    >{{ deal.viewed_at|timesince }} ago</span
+                  >
+                  <a
+                    href="{{ deal.src_url }}"
+                    class="btn-sm"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    View Deal
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                      />
+                      <polyline points="15 3 21 3 21 9" />
+                      <line x1="10" y1="14" x2="21" y2="3" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% empty %}
+          <div class="tab-empty">
+            <p>Your deal history will appear here.</p>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <!-- Tracked Categories -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-row">
+            <h2 class="card-title">Tracked Categories</h2>
+            <a href="{% url 'settings' %}" class="btn-ghost-sm">Manage</a>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="category-list">
+            {% for tc in tracked_categories %}
+            <div class="category-item">
+              <div>
+                <div class="category-name">{{ tc.category.label }}</div>
+                <div class="category-count">{{ tc.deal_count }} deals</div>
+              </div>
+              <div class="category-dot"></div>
+            </div>
+            {% empty %}
+            <p>No categories tracked yet.</p>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <!-- This Week -->
+      <div class="card">
+        <div class="card-header">
+          <h2 class="card-title">This Week</h2>
+        </div>
+        <div class="card-content">
+          <div class="week-stat">
+            <span>New Deals</span>
+            <span class="val">{{ week_stats.new_deals }}</span>
+          </div>
+          <div class="week-stat">
+            <span>Notifications Sent</span>
+            <span class="val">{{ week_stats.notifications_sent }}</span>
+          </div>
+          <div class="week-stat">
+            <span>Avg. Discount</span>
+            <span class="val green">{{ week_stats.avg_discount }}%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Price Alert -->
+      <div class="card alert-card">
+        <div class="card-header">
+          <div class="alert-icon-row">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+              <polyline points="16 7 22 7 22 13" />
+            </svg>
+            <h2 class="card-title">Price Alert!</h2>
+          </div>
+          <p class="card-description">
+            {{ price_alert_count }} products in your tracked categories just
+            dropped below your target price
+          </p>
+        </div>
+        <div class="card-content">
+          <button class="btn-secondary">View All Alerts</button>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+{% endblock %} {% block extra_scripts %}
+<script src="{% static 'core/js/app.js' %}"></script>
+{% endblock %}

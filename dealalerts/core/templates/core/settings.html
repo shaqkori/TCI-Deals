@@ -1,0 +1,390 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Settings — DealAlerts{% endblock %}
+
+{% block content %}
+<main class="container">
+  <div class="page-heading">
+    <h1>Settings</h1>
+    <p>Manage your account and notification preferences</p>
+  </div>
+
+  <!-- Messages -->
+  {% if messages %}
+    {% for message in messages %}
+      <p class="{% if message.tags == 'error' %}error{% else %}success{% endif %}">{{ message }}</p>
+    {% endfor %}
+  {% endif %}
+
+  <!-- Tab bar -->
+  <div class="tabs-list" role="tablist">
+    <button class="tab-btn active" role="tab" aria-selected="true" data-tab="profile">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="8" r="4" />
+        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+      </svg>
+      <span>Profile</span>
+    </button>
+    <button class="tab-btn" role="tab" aria-selected="false" data-tab="categories">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+        <circle cx="12" cy="12" r="3" />
+      </svg>
+      <span>Categories</span>
+    </button>
+    <button class="tab-btn" role="tab" aria-selected="false" data-tab="notifications">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+        <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+      </svg>
+      <span>Notifications</span>
+    </button>
+    <button class="tab-btn" role="tab" aria-selected="false" data-tab="billing">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect width="22" height="16" x="1" y="4" rx="2" />
+        <line x1="1" y1="10" x2="23" y2="10" />
+      </svg>
+      <span>Billing</span>
+    </button>
+  </div>
+
+  <!-- ── Profile Tab ── -->
+  <div id="tab-profile" class="tab-panel active" role="tabpanel">
+
+    <!-- Personal Info -->
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Personal Information</h2>
+        <p class="card-description">Update your account details</p>
+      </div>
+      <div class="card-content">
+        <form method="POST" action="{% url 'settings_profile' %}">
+          {% csrf_token %}
+          <input type="hidden" name="form_type" value="profile" />
+          <div class="name-grid">
+            <div class="field">
+              <label for="firstName">First Name</label>
+              <input id="firstName" name="first_name" type="text" value="{{ user.first_name }}" />
+            </div>
+            <div class="field">
+              <label for="lastName">Last Name</label>
+              <input id="lastName" name="last_name" type="text" value="{{ user.last_name }}" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" value="{{ user.email }}" />
+          </div>
+          <div class="field">
+            <label for="phone">Phone Number</label>
+            <input id="phone" name="phone" type="tel" value="{{ user.profile.phone|default:'' }}" />
+          </div>
+          <button type="submit" class="btn-primary">Save Changes</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Change Password -->
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Change Password</h2>
+        <p class="card-description">Update your password</p>
+      </div>
+      <div class="card-content">
+        <form method="POST" action="{% url 'settings_password' %}">
+          {% csrf_token %}
+          <input type="hidden" name="form_type" value="password" />
+          <div class="field">
+            <label for="currentPassword">Current Password</label>
+            <input id="currentPassword" name="current_password" type="password" placeholder="••••••••" autocomplete="current-password" />
+          </div>
+          <div class="field">
+            <label for="newPassword">New Password</label>
+            <input id="newPassword" name="new_password1" type="password" placeholder="••••••••" autocomplete="new-password" />
+          </div>
+          <div class="field">
+            <label for="confirmPassword">Confirm New Password</label>
+            <input id="confirmPassword" name="new_password2" type="password" placeholder="••••••••" autocomplete="new-password" />
+          </div>
+          <button type="submit" class="btn-primary">Update Password</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Categories Tab ── -->
+  <div id="tab-categories" class="tab-panel" role="tabpanel">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Manage Tracked Categories</h2>
+        <div class="card-description">
+          Select the product categories you want to track for deals
+          <div style="margin-top:0.5rem">
+            <span class="badge-outline">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M11.562 3.266a1 1 0 0 1 .876 0L16 5l4 2-1 4.5-3 3.5-4 1-4-1-3-3.5L4 7l4-2z"/>
+                <path d="M12 12v9" />
+                <path d="M8.5 21h7" />
+              </svg>
+              {{ user.profile.plan.name|title }}: {{ user.profile.plan.max_tracked_categories }} categories
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="card-content">
+        <form method="POST" action="{% url 'settings_categories' %}">
+          {% csrf_token %}
+          <input type="hidden" name="form_type" value="categories" />
+
+          {% for category in all_categories %}
+            {% with is_tracked=category.is_tracked %}
+            <div class="category-row">
+              <div class="category-row-left">
+                <div class="category-dot {% if not is_tracked %}invisible{% endif %}"></div>
+                <div>
+                  <div class="category-name">{{ category.label }}</div>
+                  <div class="category-status">{% if is_tracked %}Active{% else %}Inactive{% endif %}</div>
+                </div>
+              </div>
+              <label class="switch" aria-label="Toggle {{ category.label }}">
+                <input
+                  type="checkbox"
+                  name="categories"
+                  value="{{ category.value }}"
+                  {% if is_tracked %}checked{% endif %}
+                  onchange="syncDot(this)"
+                />
+                <span class="switch-track"></span>
+              </label>
+            </div>
+            {% endwith %}
+          {% endfor %}
+
+          <button type="submit" class="btn-primary" style="margin-top:1rem">Save Categories</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Alert Thresholds -->
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Alert Thresholds</h2>
+        <p class="card-description">Set minimum discount percentage to trigger alerts</p>
+      </div>
+      <div class="card-content">
+        <form method="POST" action="{% url 'settings_threshold' %}">
+          {% csrf_token %}
+          <input type="hidden" name="form_type" value="threshold" />
+          <div class="field">
+            <label for="threshold">Minimum Discount (%)</label>
+            <div class="select-wrap">
+              <select id="threshold" name="threshold">
+                {% for value, label in threshold_options %}
+                  <option value="{{ value }}" {% if user.profile.alert_threshold == value %}selected{% endif %}>
+                    {{ label }}
+                  </option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="btn-primary">Save Threshold</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Notifications Tab ── -->
+  <div id="tab-notifications" class="tab-panel" role="tabpanel">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Notification Channels</h2>
+        <p class="card-description">Choose how you want to receive deal alerts</p>
+      </div>
+      <div class="card-content">
+        <form method="POST" action="{% url 'settings_notifications' %}">
+          {% csrf_token %}
+          <input type="hidden" name="form_type" value="notifications" />
+
+          <div class="setting-row">
+            <div>
+              <div class="setting-row-label">Email Notifications</div>
+              <div class="setting-row-desc">Receive alerts via email</div>
+            </div>
+            <label class="switch" aria-label="Toggle email notifications">
+              <input type="checkbox" name="email_notifications" {% if notifications.email %}checked{% endif %} />
+              <span class="switch-track"></span>
+            </label>
+          </div>
+
+          <div class="setting-row">
+            <div>
+              <div class="setting-row-label">
+                SMS Notifications
+                {% if not user.profile.plan.allows_sms %}
+                  <span class="badge-outline">Premium</span>
+                {% endif %}
+              </div>
+              <div class="setting-row-desc">Get instant text message alerts</div>
+            </div>
+            <label class="switch" aria-label="Toggle SMS notifications">
+              <input type="checkbox" name="sms_notifications"
+                {% if notifications.sms %}checked{% endif %}
+                {% if not user.profile.plan.allows_sms %}disabled{% endif %}
+              />
+              <span class="switch-track"></span>
+            </label>
+          </div>
+
+          <div class="setting-row">
+            <div>
+              <div class="setting-row-label">
+                WhatsApp Notifications
+                {% if not user.profile.plan.allows_whatsapp %}
+                  <span class="badge-outline">Premium</span>
+                {% endif %}
+              </div>
+              <div class="setting-row-desc">Receive alerts on WhatsApp</div>
+            </div>
+            <label class="switch" aria-label="Toggle WhatsApp notifications">
+              <input type="checkbox" name="whatsapp_notifications"
+                {% if notifications.whatsapp %}checked{% endif %}
+                {% if not user.profile.plan.allows_whatsapp %}disabled{% endif %}
+              />
+              <span class="switch-track"></span>
+            </label>
+          </div>
+
+          <button type="submit" class="btn-primary" style="margin-top:1rem">Save Notifications</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Notification Frequency -->
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Notification Frequency</h2>
+        <p class="card-description">Control when and how often you receive alerts</p>
+      </div>
+      <div class="card-content">
+        <form method="POST" action="{% url 'settings_frequency' %}">
+          {% csrf_token %}
+          <input type="hidden" name="form_type" value="frequency" />
+
+          <div class="setting-row">
+            <div>
+              <div class="setting-row-label">Instant Alerts</div>
+              <div class="setting-row-desc">Get notified immediately when deals are found</div>
+            </div>
+            <label class="switch" aria-label="Toggle instant alerts">
+              <input type="checkbox" name="instant_alerts" {% if user.profile.instant_alerts %}checked{% endif %} />
+              <span class="switch-track"></span>
+            </label>
+          </div>
+
+          <div class="setting-row">
+            <div>
+              <div class="setting-row-label">Daily Digest</div>
+              <div class="setting-row-desc">Receive a summary of all deals once per day</div>
+            </div>
+            <label class="switch" aria-label="Toggle daily digest">
+              <input type="checkbox" name="daily_digest" {% if user.profile.daily_digest %}checked{% endif %} />
+              <span class="switch-track"></span>
+            </label>
+          </div>
+
+          <div class="field">
+            <label for="digestTime">Daily Digest Time</label>
+            <div class="select-wrap">
+              <select id="digestTime" name="digest_time">
+                <option value="06:00" {% if user.profile.digest_time == "06:00" %}selected{% endif %}>6:00 AM</option>
+                <option value="09:00" {% if user.profile.digest_time == "09:00" %}selected{% endif %}>9:00 AM</option>
+                <option value="12:00" {% if user.profile.digest_time == "12:00" %}selected{% endif %}>12:00 PM</option>
+                <option value="18:00" {% if user.profile.digest_time == "18:00" %}selected{% endif %}>6:00 PM</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary">Save Frequency</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Billing Tab ── -->
+  <div id="tab-billing" class="tab-panel" role="tabpanel">
+
+    <!-- Current Plan -->
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Current Plan</h2>
+        <p class="card-description">Manage your subscription</p>
+      </div>
+      <div class="card-content">
+        <div class="plan-row">
+          <div>
+            <div class="plan-name-row">
+              <span class="plan-title">{{ user.profile.plan.name|title }} Plan</span>
+              <span class="badge-blue">Active</span>
+            </div>
+            <div class="plan-price">£{{ user.profile.plan.price }} / month</div>
+            <div class="plan-next">Next billing date: {{ next_billing_date }}</div>
+          </div>
+          <a href="{% url 'pricing' %}" class="btn-outline">Change Plan</a>
+        </div>
+
+        <div class="plan-features">
+          <h4>Your Plan Includes:</h4>
+          <ul>
+            {% for feature in plan_features %}
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                {{ feature }}
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Method -->
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Payment Method</h2>
+        <p class="card-description">Manage your payment information</p>
+      </div>
+      <div class="card-content">
+        {% if payment_method %}
+          <div class="payment-row">
+            <div class="payment-left">
+              <div class="card-icon-box">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect width="22" height="16" x="1" y="4" rx="2" />
+                  <line x1="1" y1="10" x2="23" y2="10" />
+                </svg>
+              </div>
+              <div>
+                <div class="card-number">•••• •••• •••• {{ payment_method.last4 }}</div>
+                <div class="card-expiry">Expires {{ payment_method.expiry }}</div>
+              </div>
+            </div>
+            <button class="btn-outline">Update</button>
+          </div>
+        {% endif %}
+        <button class="btn-ghost-full">+ Add New Payment Method</button>
+      </div>
+    </div>
+
+    <!-- Billing History -->
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">Billing History</h2>
+        <p class="card-description">View your past invoices</p>
+      </div>
+      <div class="card-content">
+        {% for invoice in billing_history %}
+          <div class="invoice-row">
+            <div>
+              <div class="invoice-date">{{ invoice.date|date:"M d, Y" }}</div

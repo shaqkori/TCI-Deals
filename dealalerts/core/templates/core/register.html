@@ -1,0 +1,146 @@
+{% extends 'core/base.html' %} {% load static %} {% block title %}Register —
+DealAlerts{% endblock %} {% block extra_head %}
+<style>
+  .name-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .terms-note {
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--muted-foreground);
+    line-height: 1.5;
+  }
+  .terms-note a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+  .terms-note a:hover {
+    text-decoration: underline;
+  }
+</style>
+{% endblock %} {% block content %}
+<div class="page">
+  <a href="{% url 'landing' %}" class="logo">
+    <svg
+      class="logo-icon"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+      <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+    </svg>
+    <span class="logo-text">DealAlerts</span>
+  </a>
+
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">Create Your Account</h2>
+      <p class="card-description">Start tracking deals in minutes</p>
+    </div>
+
+    <div class="card-content">
+      {% if form.errors %}
+      <div class="form-errors">
+        {% for field in form %} {% for error in field.errors %}
+        <p class="error">{{ error }}</p>
+        {% endfor %} {% endfor %} {% for error in form.non_field_errors %}
+        <p class="error">{{ error }}</p>
+        {% endfor %}
+      </div>
+      {% endif %} {% if messages %} {% for message in messages %}
+      <p class="error">{{ message }}</p>
+      {% endfor %} {% endif %}
+
+      <form class="form" method="POST" action="{% url 'register' %}" novalidate>
+        {% csrf_token %}
+
+        <div class="name-grid">
+          <div class="field">
+            <label for="firstName">First Name</label>
+            <input
+              id="firstName"
+              name="first_name"
+              type="text"
+              placeholder="John"
+              value="{{ form.first_name.value|default:'' }}"
+              required
+              autocomplete="given-name"
+            />
+          </div>
+          <div class="field">
+            <label for="lastName">Last Name</label>
+            <input
+              id="lastName"
+              name="last_name"
+              type="text"
+              placeholder="Doe"
+              value="{{ form.last_name.value|default:'' }}"
+              required
+              autocomplete="family-name"
+            />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="you@example.com"
+            value="{{ form.email.value|default:'' }}"
+            required
+            autocomplete="email"
+          />
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <input
+            id="password"
+            name="password1"
+            type="password"
+            placeholder="••••••••"
+            required
+            autocomplete="new-password"
+          />
+        </div>
+
+        <div class="field">
+          <label for="confirmPassword">Confirm Password</label>
+          <input
+            id="confirmPassword"
+            name="password2"
+            type="password"
+            placeholder="••••••••"
+            required
+            autocomplete="new-password"
+          />
+        </div>
+
+        <button type="submit" class="btn-primary">Create Account</button>
+
+        <p class="terms-note">
+          By creating an account, you agree to our
+          <a href="#terms">Terms of Service</a>
+          and
+          <a href="#privacy">Privacy Policy</a>
+        </p>
+
+        <p class="signup-prompt">
+          Already have an account?
+          <a href="{% url 'login' %}">Login</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

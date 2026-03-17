@@ -1,0 +1,88 @@
+{% extends 'core/base.html' %} {% load static %} {% block title %}Login —
+DealAlerts{% endblock %} {% block content %}
+<div class="page">
+  <a href="{% url 'landing' %}" class="logo">
+    <svg
+      class="logo-icon"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+      <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+    </svg>
+    <span class="logo-text">DealAlerts</span>
+  </a>
+
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">Welcome Back</h2>
+      <p class="card-description">Login to your account to continue</p>
+    </div>
+
+    <div class="card-content">
+      <!-- Django form errors -->
+      {% if form.errors %}
+      <div class="form-errors">
+        {% for field in form %} {% for error in field.errors %}
+        <p class="error">{{ error }}</p>
+        {% endfor %} {% endfor %} {% for error in form.non_field_errors %}
+        <p class="error">{{ error }}</p>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <!-- Django messages (e.g. "Invalid credentials") -->
+      {% if messages %} {% for message in messages %}
+      <p class="error">{{ message }}</p>
+      {% endfor %} {% endif %}
+
+      <form class="form" method="POST" action="{% url 'login' %}" novalidate>
+        {% csrf_token %}
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="you@example.com"
+            value="{{ form.email.value|default:'' }}"
+            required
+            autocomplete="email"
+          />
+        </div>
+
+        <div class="field">
+          <div class="field-row">
+            <label for="password">Password</label>
+            <a href="{% url 'password_reset' %}" class="link-small"
+              >Forgot password?</a
+            >
+          </div>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            placeholder="••••••••"
+            required
+            autocomplete="current-password"
+          />
+        </div>
+
+        <button type="submit" class="btn-primary">Login</button>
+
+        <p class="signup-prompt">
+          Don't have an account?
+          <a href="{% url 'register' %}">Sign up</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

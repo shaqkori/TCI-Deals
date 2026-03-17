@@ -14,9 +14,27 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
+# core/urls.py
+
 from django.urls import path
+from . import views
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path("",                          views.landing,                name="landing"),
+    path("register/",                 views.register,               name="register"),
+    path("login/",                    views.login_view,             name="login"),
+    path("logout/",                   views.logout_view,            name="logout"),
+    path("onboarding/",               views.onboarding,             name="onboarding"),
+    path("dashboard/",                views.dashboard,              name="dashboard"),
+    path("pricing/",                  views.pricing,                name="pricing"),
+    path("settings/",                 views.settings_view,          name="settings"),
+    path("settings/profile/",         views.settings_profile,       name="settings_profile"),
+    path("settings/password/",        views.settings_password,      name="settings_password"),
+    path("settings/categories/",      views.settings_categories,    name="settings_categories"),
+    path("settings/notifications/",   views.settings_notifications, name="settings_notifications"),
+    path("settings/threshold/",       views.settings_threshold,     name="settings_threshold"),
+    path("settings/frequency/",       views.settings_frequency,     name="settings_frequency"),
+    path("cancel-subscription/",      views.cancel_subscription,    name="cancel_subscription"),
+    path("invoices/<int:id>/",         views.download_invoice,       name="download_invoice"),
+    path("deals/<int:deal_id>/history/", views.add_to_history,      name="add_to_history"),
 ]
